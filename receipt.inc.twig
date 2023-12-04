@@ -281,7 +281,8 @@
         <fieldset>
             <legend>{{ config.lang.checkout_additional_information|raw }}</legend>
 
-            {% for key,custom_field in custom_fields %}
+            {# Existing custom fields #}
+            {% for key, custom_field in custom_fields %}
             {% if not custom_field.is_hidden %}
             <div id="fc-receipt__section--custom-field--{{ key }}" class="fc-form-group fc-form-group--static fc-form-group--receipt--custom-field">
                 <label class="fc-form-label fc-container__grid--static-label--custom-field">{{ key|replace({'_': ' '})|title }}</label>
@@ -291,6 +292,17 @@
             </div>
             {% endif %}
             {% endfor %}
+
+            {# New accessInstructions field #}
+            {% if custom_fields.accessInstructions %}
+            <div id="fc-receipt__section--custom-field--accessInstructions" class="fc-form-group fc-form-group--static fc-form-group--receipt--custom-field">
+                <label class="fc-form-label fc-container__grid--static-label--custom-field">Access Instructions</label>
+                <div class="fc-container__grid--static-input--custom-field">
+                    <p class="fc-form-control--static">{{ custom_fields.accessInstructions.value }}</p>
+                </div>
+            </div>
+            {% endif %}
+
         </fieldset>
     </div>
 {% endif %}
